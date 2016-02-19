@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Line below describes the style of the map. It will take up as much room as its parent's div. -->
+    <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 100%; }
+    </style>
+  </head>
+  <body>
+    <!-- Div container below. The javascript later will render the map within this div. -->
+    <div id="map"></div>
+    <script type="text/javascript">
+
+// var map;
+// // function to create the instance of the map.
+// function initMap() {
+//    // var myLatlng = new google.maps.LatLng(-34.397, 150.644);
+//    var mapOptions = {
+//     // In here I can set all the options for the map which I will later pass through in the parameters for making a new instance of the map. I am leaving the default UI. Specifications below will override the default UI.
+//     zoom: 8,
+//     center: {lat: -28.643387, lng: 153.612224},
+//     // This centers the map to approximately sydney but it is zoomed out significantly.
+//     zoomControl: true,
+//     // Below gives control options for the type of map whether it is regular map type or satellite imagery.
+//     mapTypeControl: false,
+//     scaleControl: true,
+//     streetViewControl: false,
+//     MapTypeId: google.maps.MapTypeId.SATELLITE
+//   };
+//   map = new google.maps.Map(document.getElementById('map'), mapOptions);
+// };
+
+function initMap() {
+  var myLatLng = {lat: 40.738174, lng: -73.9565966};
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: myLatLng
+  });
+var directionsDisplay = new google.maps.DirectionsRenderer();
+var directionsService = new google.maps.DirectionsService();
+
+function calcRoute() {
+  var origin      = new google.maps.LatLng(41.850033, -87.6500523);
+  var destination = new google.maps.LatLng(42.850033, -85.6500523);
+  var request = {
+      origin:      origin,
+      destination: destination,
+      travelMode:  google.maps.TravelMode.DRIVING
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
+  });
+}
+
+calcRoute(); // call this anywhere you want
+
+var handler = Gmaps.build('Google');
+handler.buildMap({ internal: {id: 'map'}}, function(){
+  directionsDisplay.setMap(handler.getMap());
+});
+
+  // var image = {
+  // set variable of image to an image file
+  //   url: 'heart.ico',
+  //   size:
+  // Could not resize the icon. It became too big.
+  // };
+
+  // Below is the content string that will go inside the info window.
+    // var contentString = '<div id="content">'+
+    //   '<div id="siteNotice">'+
+    //   '</div>'+
+    //   '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+    //   '<div id="bodyContent">'+
+    //   '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+    //   'sandstone rock formation in the southern part of the '+
+    //   'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+    //   'south west of the nearest large town, Alice Springs; 450&#160;km '+
+    //   '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+    //   'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+    //   'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+    //   'Aboriginal people of the area. It has many springs, waterholes, '+
+    //   'rock caves and ancient paintings. Uluru is listed as a World '+
+    //   'Heritage Site.</p>'+
+    //   '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+    //   'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+    //   '(last visited June 22, 2009).</p>'+
+    //   '</div>'+
+    //   '</div>';
+
+      // Creating a variable infowind and setting it to a new gmaps inforwindow and passing the contentString variable defined above as a paramter
+    // var infowindow = new google.maps.InfoWindow({
+    // content: contentString
+    //   });
+
+
+  // var marker = new google.maps.Marker({
+  //   position: myLatLng,
+  //   map: map,
+  //   // set icon to the image variable defined above.
+  //   title: 'Hello World!',
+  //   draggable: true,
+  //   // Below line animates that the marker should drop onto map.
+  //   animation: google.maps.Animation.DROP
+  // });
+
+      // Adding a listener for click on the marker which will open the infowindow on the marker.
+    //   marker.addListener('click', function() {
+    // infowindow.open(map, marker);
+    //   });
+}
+
+
+
+
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFFlZW6MXrpxzn0MRnGqtzKkQGlKyqmlk&callback=initMap">
+    </script>
+  </body>
+</html>

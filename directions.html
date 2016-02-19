@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Line below describes the style of the map. It will take up as much room as its parent's div. -->
+    <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 100%; }
+    </style>
+  </head>
+  <body>
+    <!-- Div container below. The javascript later will render the map within this div. -->
+    <div id="map"></div>
+    <script type="text/javascript">
+  
+
+  var directionsDisplay;
+  var directionsService = new google.maps.DirectionsService();
+  var map;
+
+function initialize() {
+  // Below is creating a new Direction Renderer object and setting it equal to directionsDisplay var.
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  // Setting the origin variable to the latlng passed below.
+  var origin = new google.maps.LatLng(41.850033, -87.6500523);
+  // Defining the map options variable as zoomed slightly into the variable origin
+  var mapOptions = {
+    zoom:7,
+    center: origin
+  }
+   // Setting the map variable to a new google maps map object, grabbing the div ID of map and passing it a map with the map options.
+   map = new google.maps.Map(document.getElementById("map"), mapOptions);
+   // taking the directions renderer object and running the setMap method on it and passing the newly created map object as a param.
+   directionsDisplay.setMap(map)
+}
+
+
+// Create a new function called calcRoute
+function calcRoute() {
+  // Creating a variable named origin and destination. make them a map object passing in two latlngs
+  var origin      = new google.maps.LatLng(41.850033, -87.6500523);
+  var destination = new google.maps.LatLng(42.850033, -85.6500523);
+  // Create a request variable that has the variables defined above passed as the origin and destination
+  // Also define the travel mode. in this case its driving directions.
+  var request = {
+    origin:origin,
+    destination:destination,
+    travelMode: google.maps.TravelMode.DRIVING
+  };
+
+calcRoute();
+
+
+
+
+
+
+
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFFlZW6MXrpxzn0MRnGqtzKkQGlKyqmlk&callback=initMap">
+    </script>
+  </body>
+</html>
